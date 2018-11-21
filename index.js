@@ -137,6 +137,7 @@ const parseTextResponse = function (body, url, options, contentType) {
     url: url,
     title: getTitle(doc),
     description: getDescription(doc),
+    keywords: getKeyword(doc),
     mediaType: getMediaType(doc) || 'website',
     contentType: contentType,
     images: getImages(doc, url, options.imagesPropertyType),
@@ -167,6 +168,11 @@ const getDescription = function(doc) {
   }
 
   return description;
+};
+
+const getKeyword = function(doc) {
+  var keyword = doc('meta[name=keywords]').attr('content');
+  return keyword;
 };
 
 const getMediaType = function(doc) {
